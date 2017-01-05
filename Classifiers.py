@@ -20,33 +20,24 @@ def fitData(X_train,y_train,X_test,y_test,classifier):
         clf1 = [GaussianNB()]
     elif classifier == "DecisionTree":
         clf1 = []
-        param = [None,1,3,5,7]
-        paramName = "maxDepth"
-        for i in param:
-            clf1.append(DecisionTreeClassifier(max_depth=i))#criterion="entropy"
+        clf1.append(DecisionTreeClassifier(random_state = 42))
     elif classifier == "KNN":
         clf1 = []
-        param = [5,10,15,20]
-        paramName = "n_neighbors"
-        for i in param:
-            clf1.append(KNeighborsClassifier(n_neighbors=i))#, weights='distance'))
+        clf1.append(KNeighborsClassifier())
     elif classifier == "SGD":
-        clf1 = [SGDClassifier()]
+        clf1 = [SGDClassifier(random_state = 42)]
     elif classifier == "SVM":
         clf1 = []
-        param = ["rbf","sigmoid","linear"]
-        paramName = "kernel"
-        for i in param:
-            clf1.append(SVC(kernel=i))
+        clf1.append(SVC(random_state = 42))
     elif classifier == "LogisticRegression":
         clf1 = [LogisticRegression()]
     else:
         clf1 = []
-        param1 = [DecisionTreeClassifier(max_depth=1),GaussianNB(),LogisticRegression()]#,SGDClassifier()]
+        param1 = [DecisionTreeClassifier(random_state = 42),GaussianNB(),LogisticRegression()]#,SGDClassifier()]
         param = ["DT","NB","LogReg"]#,"SGD"]
         paramName = ""
         for i in param1:
-            clf1.append(AdaBoostClassifier(i,n_estimators=100))#,algorithm="SAMME"))
+            clf1.append(AdaBoostClassifier(i))
 
     plt.figure(figsize=(20, 10))
     ax1 = plt.subplot2grid((3, 1), (0, 0), rowspan=2)
